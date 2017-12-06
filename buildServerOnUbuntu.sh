@@ -1,4 +1,4 @@
-#!/bin/ksh
+
 #reset config file
 printf ".... 1.0 reset conf file to default\n"
 git checkout conf/default.conf
