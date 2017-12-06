@@ -1,5 +1,10 @@
 #!/bin/ksh
+#reset config file
+printf ".... 1.0 reset conf file to default\n"
+git checkout conf/default.conf
+
 #create nginx configuration file
+printf ".... 1.0.1 get my ip address...\n"
 myip=`ifconfig | grep "broadcast"| head -n1 | cut -d " " -f2`
 echo $myip
 
