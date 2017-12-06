@@ -7,24 +7,24 @@ sed -i -e "s/proxy_pass http:\/\/myip:9010\/api\/login;/proxy_pass http:\/\/"$my
 
 DOCKER_SERVICE_NAME='contentserver'
 
-printf ".... 3.1 list all running containers\n"
+printf ".... 1.1 list all running containers\n"
 docker container ls
-printf ".... 3.2  stop and removal of current content server...\n"
+printf ".... 1.2  stop and removal of current content server...\n"
 docker rm $(docker stop $(docker ps -a -q --filter ancestor=$DOCKER_SERVICE_NAME --format="{{.ID}}"))
-printf ".... 4.1 list all images before delete\n"
+printf ".... 2.1 list all images before delete\n"
 docker images
-printf ".... 4.2 remove docker image for $DOCKER_SERVICE_NAME...\n"
+printf ".... 2.2 remove docker image for $DOCKER_SERVICE_NAME...\n"
 docker rmi $DOCKER_SERVICE_NAME
-printf ".... 4.3 list all images after delete\n"
+printf ".... 2.3 list all images after delete\n"
 docker images
-printf ".... 4.4 build content server image again...\n"
+printf ".... 2.4 build content server image again...\n"
 docker build -t $DOCKER_SERVICE_NAME .
 
 
 
 printf "32769:80 -> 80:80"
-printf ".... 5 start content server...\n"
+printf ".... 3 start content server...\n"
 docker run -d -p 80:80 $DOCKER_SERVICE_NAME
 
-printf ".... 6 show running server info...\n"
+printf ".... 4 show running server info...\n"
 docker container ls
