@@ -1,9 +1,9 @@
 #!/bin/ksh
 #create nginx configuration file
-MyIP=`ifconfig | grep "broadcast"| head -n1 | cut -d " " -f2`
-echo $MyIP
+myip=`ifconfig | grep "broadcast"| head -n1 | cut -d " " -f2`
+echo $myip
 
-sed -i -e "s/proxy_pass http:\/\/myip\/api\/login;/proxy_pass http:\/\/"$myip":9010\/api\/login;/g" conf/default.conf
+sed -i -e "s/proxy_pass http:\/\/myip:9010\/api\/login;/proxy_pass http:\/\/"$myip":9010\/api\/login;/g" conf/default.conf
 
 DOCKER_SERVICE_NAME='contentserver'
 
