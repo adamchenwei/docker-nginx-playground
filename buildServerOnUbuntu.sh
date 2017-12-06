@@ -8,7 +8,7 @@ ls -lA
 
 #create nginx configuration file
 printf ".... 1.0.1 get my ip address...\n"
-myip=`ifconfig | grep "broadcast"| head -n1 | cut -d " " -f2`
+myip=`ifconfig eth0 | grep "inet addr" | cut -d ':' -f 2 | cut -d ' ' -f 1`
 echo $myip
 
 sed -i "s/proxy_pass http:\/\/myip:9010\/api\/login;/proxy_pass http:\/\/"$myip":9010\/api\/login;/g" conf/default.conf
