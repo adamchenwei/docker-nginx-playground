@@ -3,6 +3,9 @@
 printf ".... 1.0 reset conf file to default\n"
 git checkout conf/default.conf
 
+printf ".... 1.0.0 list all the files...\n"
+ls -lA
+
 #create nginx configuration file
 printf ".... 1.0.1 get my ip address...\n"
 myip=`ifconfig | grep "broadcast"| head -n1 | cut -d " " -f2`
