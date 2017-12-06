@@ -18,7 +18,9 @@ DOCKER_SERVICE_NAME='contentserver'
 printf ".... 1.1 list all running containers\n"
 docker container ls
 printf ".... 1.2  stop and removal of current content server...\n"
-docker rm $(docker stop $(docker ps -a -q --filter ancestor=$DOCKER_SERVICE_NAME --format="{{.ID}}"))
+sudo docker ps -q --filter ancestor="$DOCKER_SERVICE_NAME" | xargs -r sudo docker stop
+sudo docker ps -q --filter ancestor="$DOCKER_SERVICE_NAME" | xargs -r sudo docker rm
+sudo docker ps -q --filter ancestor="$DOCKER_SERVICE_NAME" --filter "status=exited" | xargs -r sudo docker rm
 printf ".... 2.1 list all images before delete\n"
 docker images
 printf ".... 2.2 remove docker image for $DOCKER_SERVICE_NAME...\n"
